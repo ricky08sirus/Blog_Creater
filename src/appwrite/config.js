@@ -42,18 +42,56 @@ export class service{
 
         
     }
+
+    async  createPost(title,slug,content,featuredImage,status,userId){
+        // const databaseId = ; // Your database ID
+        // const collectionId = 'your collection_id' //your collection ID
+        const post = {
+            title,
+            slug,
+            content,
+            featuredImage,
+            status,
+            userId
+        };
+
+        try {
+            const response = await this.databases.createDocument(conf.appwriteDatabaseId, conf.appwriteCollectionId, slug, post)
+
+            return response
+
+            
+        } catch (error) {
+            console.log("Appwrite service :: createPost()::",error)
+            return false
+
+            
+        }
+    
+
+    }
+
+    async updatePost(postId, title, slug, content, featuredImage, status, userId){
+        const updatedPost = {
+            title,
+            slug,
+            content,
+            featuredImage,
+            userId
+
+        }
+        try {
+            const response = await this.database.updateDocument(conf.appwriteDatabaseId, conf.appwriteCollectionId, slug, updatedPost);
+
+            return response
+
+            
+        } catch (error) {
+            console.log("Appwrite service :: updatePost()::",error)
+            return false
+            
+        }
+
+    }
 }
 
-const client = new Client()
-    .setEndpoint('https://cloud.appwrite.io/v1') // Your API Endpoint
-    .setProject('5df5acd0d48c2'); // Your project ID
-
-const databases = new Databases(client);
-
-const result = await databases.listDocuments(
-    '<DATABASE_ID>', // databaseId
-    '<COLLECTION_ID>', // collectionId
-    [] // queries (optional)
-);
-
-console.log(response);
