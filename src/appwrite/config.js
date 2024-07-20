@@ -5,7 +5,8 @@ import { Client, Databases,Storage,Query } from "appwrite";
 export class service{
     client = new Client();
     database;
-    bucket;
+    bucket; //folders are known as bucket
+
 
     constructor(){
         this.client.setEndpoint(conf.appwriteUrl)

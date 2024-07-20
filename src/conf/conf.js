@@ -1,4 +1,5 @@
 //comm prac
+//now we can import this anywhere also helps in handling error...
 
 const conf = {
   appwriteUrl: String(process.env.REACT_APP_APPWRITE_URL),

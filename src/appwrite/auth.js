@@ -1,10 +1,11 @@
 //integrating the auth section
 import conf from "../conf/conf.js"
+//put the repeatable objects in class and use constructor
 
 import { Client, Account,ID} from "appwrite";
 
 export class AuthService {
-    client = new client();
+    client = new Client();
     account;
 
     constructor(){
