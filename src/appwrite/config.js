@@ -93,5 +93,20 @@ export class service{
         }
 
     }
+
+  async deletePost(collectionId,slug){
+    try {
+      const response = await databases.deleteDocument(conf.appwriteDatabaseId,conf.appwriteCollectionId,slug)
+      console.log("Document deleted successfully",response)
+
+
+      
+    } catch (error) {
+      console.log("Appwrite service :: deletePost()::",error)
+      return false
+      
+    }
+  }
+
 }
 
