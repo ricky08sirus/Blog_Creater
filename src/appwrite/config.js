@@ -1,5 +1,5 @@
 import conf from "../conf/conf.js"
-import { Client, Databases,Storage,Query } from "appwrite";
+import { Client, Databases,Storage,Query,ID } from "appwrite";
 
 
 export class service{
@@ -108,5 +108,58 @@ export class service{
     }
   }
 
+  //strorage service
+  async uploadFile(filePath){
+    try {
+      const file = fs.createReadStream(filePath)
+      const response = await storage.createFile(conf.appwriteBucketId,ID.unique(), file)
+      //console.log("file uploaded successfully",response)
+      return response
+
+    } catch (error) {
+      //console.error("error uploading file",error)
+      console.log("Appwrite service :: uploadFile()::",error)
+      return false
+
+
+      
+    }
+  }
+  async deleteFile(fileId){
+    try {
+      const response = await storage.deleteFile(conf.appwriteBucketId,fileId)
+      return response
+
+    } catch (error) {
+
+      console.log("Appwrite service :: deletefile()::",error)
+      return false
+
+      
+    }
+  }
+
+  async getFilePreview(fileId){
+    try{
+        const response = await storage.getFilePreview(conf.appwriteBucketId, fileId)
+        console.log("file preview url:",response)
+        return response
+
+
+    }
+    catch(error){
+        console.log("Appwrite service :: getFilePreview()::",error)
+        return false
+
+    }
+
+
+  }
+
+
 }
+
+const service = new Service()
+export default service
+
 
